@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pro Chat App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="chat-container">
+        <header>
+            <h2>Live Chat</h2>
+        </header>
+
+        <div id="message-area"></div>
+
+        <form id="chat-form">
+            <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" required>
+            <button type="submit" id="send-btn">Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

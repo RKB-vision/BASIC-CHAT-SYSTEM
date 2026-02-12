@@ -1,0 +1,14 @@
+body { font-family: sans-serif; display: flex; justify-content: center; background: #f0f2f5; height: 100vh; margin: 0; }
+
+#chat-container { width: 400px; background: white; display: flex; flex-direction: column; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 20px; overflow: hidden; }
+
+header { background: #075e54; color: white; padding: 15px; text-align: center; }
+
+#message-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+
+/* Message Bubbles */
+.msg { background: #e1ffc7; padding: 8px 12px; border-radius: 15px; align-self: flex-start; max-width: 80%; word-wrap: break-word; }
+
+#chat-form { display: flex; padding: 10px; background: #eee; }
+#message-input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+#send-btn { background: #075e54; color: white; border: none; padding: 10px 20px; margin-left: 5px; border-radius: 20px; cursor: pointer; }
