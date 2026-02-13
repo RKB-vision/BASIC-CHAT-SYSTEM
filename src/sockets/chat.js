@@ -20,6 +20,12 @@ module.exports = (io) => {
             // 'io.emit' talks to every single person in the chat room
             io.emit('message-to-all',data_to_send);
         });
+        socket.on("typing",()=>{
+            socket.broadcast.emit("typing",socket.user)
+        })
+        socket.on("stop-typing",()=>{
+            socket.broadcast.emit("hide-typing");
+        })
 
     });
 };

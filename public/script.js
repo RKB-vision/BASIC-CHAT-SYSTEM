@@ -1,14 +1,16 @@
 const socket = io();//is this prebuilt?
 
 // Logic: We emit an event called 'message' with a string
+allowed=["visionary","daya","roshan","krishna"]
 let username=""
-while (!username||username.trim().length<3){
+while (!username||username.trim().length<3||!allowed.includes(username.toLowerCase().trim())){
  username=prompt("Enter your name")}
 socket.emit('username',username);
 
 const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const messageArea = document.getElementById('message-area');
+const typingArea=document.getElementById("typing-monitor")
 
 // 1. Sending a message (The "Mouth")
 chatForm.addEventListener('submit', (e) => {
@@ -42,3 +44,23 @@ socket.on('message-to-all', (data) => {
 
     // messageArea.scrollTop = messageArea.scrollHeight;
 });
+
+
+let typingTimer
+messageInput.addEventListener("keydown",()=>{
+    socket.emit("typing");
+
+    clearTimeout(typingTimer);
+
+    typingTimer=setTimeout(()=>{
+        socket.emit("stop-typing");
+    },1000)
+
+})
+
+socket.on("typing",(user)=>{
+    typingArea.innerText=`${user} is Typing...`
+})
+socket.on("hide-typing",()=>
+   { typingArea.innerText="";
+})
