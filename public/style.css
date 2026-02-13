@@ -7,7 +7,9 @@ header { background: #075e54; color: white; padding: 15px; text-align: center; }
 #message-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
 
 /* Message Bubbles */
-.msg { background: #e1ffc7; padding: 8px 12px; border-radius: 15px; align-self: flex-start; max-width: 80%; word-wrap: break-word; }
+.mymsg { background: #c1bceb9e; padding: 8px 12px; border-radius: 15px; align-self: flex-end; max-width: 80%; word-wrap: break-word; }
+
+.othermsg{background: #efefef; padding: 8px 12px; border-radius: 15px; align-self: flex-start; max-width: 80%; word-wrap: break-word; }
 
 #chat-form { display: flex; padding: 10px; background: #eee; }
 #message-input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
