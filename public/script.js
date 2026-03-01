@@ -11,6 +11,7 @@ const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const messageArea = document.getElementById('message-area');
 const typingArea=document.getElementById("typing-monitor")
+const list=document.getElementById("online-users-list")
 
 function show_msg(data){
    console.log('History says:', data.msg);
@@ -74,3 +75,32 @@ socket.on("history",(history)=>{
         show_msg(msg)
     })
 })
+
+//For Online Indicator
+socket.on("online-users",(users)=>{
+    list.innerHTML="";
+    users.forEach(user=>{
+        if(user===username) return
+        const li=document.createElement("li")
+        li.textContent=user;
+        li.dataset.user=user;
+        li.addEventListener("click",()=>openDM(user))
+        list.appendChild(li)
+    })
+})
+
+//FOR PRIVATE MESSAGE
+let activeDMUser = null;
+function openDM(user){
+    activeDMUser=user
+    document.getElementById("chat-container").style.display="none";
+    document.getElementById("dm-container").style.display="flex";
+    document.getElementById("dm-title").textContent=`Chat with ${user}`
+
+}
+document.getElementById("back-btn").addEventListener("click",()=>{
+        document.getElementById("chat-container").style.display="flex";
+        document.getElementById("dm-container").style.display="none";
+})
+
+

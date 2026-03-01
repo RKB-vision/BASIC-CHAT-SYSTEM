@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Pro Chat App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ONLINE INDICATOR -->
+    <div id="app-wrapper">               <!-- new wrapper -->
+  <div id="users-sidebar">
+    <h3>Online</h3>
+    <ul id="online-users-list"></ul>
+  </div>
+
     <div id="chat-container">
         <header>
             <h2>Live Chat</h2>
@@ -19,6 +28,18 @@
             <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" required>
             <button type="submit" id="send-btn">Send</button>
         </form>
+    </div>
+    
+    <div id="dm-container" style="display:none;">
+    <header>
+        <button id="back-btn">← Back</button>
+        <h2 id="dm-title">Chat with ...</h2>
+    </header>
+    <div id="dm-message-area"></div>
+    <form id="dm-form">
+        <input type="text" id="dm-input" placeholder="Type a private message..." autocomplete="off" required>
+        <button type="submit">Send</button>
+    </form>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

@@ -1,4 +1,6 @@
 const message=require("../models/message")
+const onlineUsers= new Map()
+
 
 module.exports = (io) => {
     io.on('connection', async (socket) => {
@@ -6,6 +8,8 @@ module.exports = (io) => {
         // LISTEN: When this specific user sends a 'message'
         socket.on("username",(data)=>{
             socket.user=data
+            onlineUsers.set(data,socket.id)
+            io.emit("online-users",Array.from(onlineUsers.keys()))
         })
 
         console.log("New User joined just now")
@@ -41,5 +45,9 @@ module.exports = (io) => {
             socket.broadcast.emit("hide-typing");
         })
 
+        socket.on("disconnect", () => {
+        onlineUsers.delete(socket.user);
+        io.emit("online-users", Array.from(onlineUsers.keys()));
+});
     });
 };
