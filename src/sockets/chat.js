@@ -45,6 +45,18 @@ module.exports = (io) => {
             socket.broadcast.emit("hide-typing");
         })
 
+        //FOR PRIVATE MESSAGING
+        socket.on("private-msg",(data)=>{
+           const user_id=onlineUsers.get(data.to)
+            if(!user_id) return
+            
+            io.to(user_id).emit("private-msg",data)
+
+            socket.emit("private-msg",data)
+
+        })
+
+
         socket.on("disconnect", () => {
         onlineUsers.delete(socket.user);
         io.emit("online-users", Array.from(onlineUsers.keys()));

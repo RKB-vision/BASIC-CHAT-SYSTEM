@@ -19,12 +19,14 @@ function show_msg(data){
     // Create a new div for the message
     const messageDiv = document.createElement('div');
     if(data.id && data.id===socket.id){
+    messageDiv.innerText =data.msg;
     messageDiv.classList.add('mymsg');
     }
     else{
+        messageDiv.innerText = `${data.user} : `+data.msg;
         messageDiv.classList.add('othermsg')
     }
-    messageDiv.innerText = `${data.user} : `+data.msg;
+    
     
     // Put it in the message area
     messageArea.appendChild(messageDiv);
@@ -90,6 +92,10 @@ socket.on("online-users",(users)=>{
 })
 
 //FOR PRIVATE MESSAGE
+const dm_form=document.getElementById("dm-form")
+const dm_input=document.getElementById("dm-input")
+const dm_area=document.getElementById("dm-message-area")
+
 let activeDMUser = null;
 function openDM(user){
     activeDMUser=user
@@ -103,4 +109,32 @@ document.getElementById("back-btn").addEventListener("click",()=>{
         document.getElementById("dm-container").style.display="none";
 })
 
+dm_form.addEventListener("submit",(e)=>{
+    e.preventDefault();
 
+    const msg=dm_input.value.trim();
+    data={
+        from:username,
+        to:activeDMUser,
+        msg
+    }
+    socket.emit("private-msg",(data))
+    dm_input.value="";
+})
+
+socket.on("private-msg",(data)=>{
+    const div=document.createElement("div")
+
+    if(data.from===username){
+        div.textContent=`${data.msg}`
+        div.classList.add("mymsg")
+    }
+    else{
+        div.textContent=`${data.from} : ${data.msg}`
+        div.classList.add("othermsg")
+    }
+    dm_area.appendChild(div)
+
+    dm_area.scrollTop=dm_area.scrollHeight;
+
+})
