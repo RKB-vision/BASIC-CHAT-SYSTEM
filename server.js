@@ -3,10 +3,15 @@ const express = require('express');
 const { Server } = require('socket.io');
 const http = require('http');//why http?
 const mongoose = require('mongoose');
+const userRoutes=require("./src/routes/userRoutes")
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+app.use(express.json())
+app.use("/",userRoutes)
+
 
 // Database Connection
 const dbURI = process.env.URL;

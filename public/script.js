@@ -1,11 +1,12 @@
 const socket = io();//is this prebuilt?
 
 // Logic: We emit an event called 'message' with a string
-allowed=["visionary","daya","roshan","krishna"]
-let username=""
-while (!username||username.trim().length<3||!allowed.includes(username.toLowerCase().trim())){
- username=prompt("Enter your name")}
-socket.emit('username',username);
+// allowed=["visionary","daya","roshan","krishna"] !allowed.includes(username.toLowerCase().trim())
+const username=localStorage.getItem("username")||""
+if (username&&username.trim().length>3)
+{
+    socket.emit('username',username);
+}
 
 const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
@@ -138,3 +139,30 @@ socket.on("private-msg",(data)=>{
     dm_area.scrollTop=dm_area.scrollHeight;
 
 })
+
+
+
+//LOGIC FOR CHECKING IF USER IS LOGGED IN OR NOT
+const token=localStorage.getItem("token")
+const join_btn=document.querySelector(".join-btn")
+
+
+if(!token){
+
+join_btn.addEventListener("click",()=>{
+    window.location.href="AUTH/login.html"
+})
+
+messageInput.disabled=true;
+dm_input.disabled=true;
+messageInput.placeholder="Click on Join Chat to start the chat..."
+dm_input.placeholder="Click on Join Chat to start the chat..."
+document.querySelectorAll(".send-btn").forEach(btn => {
+    btn.disabled=true;
+    btn.style.cursor="not-allowed";
+});
+}
+else{
+    join_btn.disabled=true;
+    document.getElementById("spectator-section").style.display="none";
+}

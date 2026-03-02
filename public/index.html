@@ -8,14 +8,23 @@
 </head>
 <body>
 
-    <!-- ONLINE INDICATOR -->
-    <div id="app-wrapper">               <!-- new wrapper -->
-  <div id="users-sidebar">
-    <h3>Online</h3>
-    <ul id="online-users-list"></ul>
-  </div>
+    <div id="app-wrapper">
+        <!-- SINGLE SIDEBAR -->
+        <aside id="users-sidebar">
+            <div class="sidebar-section">
+                <h3>Online</h3>
+                <ul id="online-users-list"></ul>
+            </div>
 
-    <div id="chat-container">
+            <!-- SPECTATOR STATUS -->
+            <div id="spectator-section" class="sidebar-section">
+                <h3>Spectator Mode</h3>
+                <p>Ready to chat?</p>
+                <button class="join-btn">Join Chat</button>
+            </div>
+        </aside>
+
+        <div id="chat-container">
         <header>
             <h2>Live Chat</h2>
         </header>
@@ -26,7 +35,7 @@
 
         <form id="chat-form">
             <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off" required>
-            <button type="submit" id="send-btn">Send</button>
+            <button type="submit" class="send-btn">Send</button>
         </form>
     </div>
     
@@ -38,7 +47,7 @@
     <div id="dm-message-area"></div>
     <form id="dm-form">
         <input type="text" id="dm-input" placeholder="Type a private message..." autocomplete="off" required>
-        <button type="submit" id="send-btn">Send</button>
+        <button type="submit" class="send-btn">Send</button>
     </form>
     </div>
 
