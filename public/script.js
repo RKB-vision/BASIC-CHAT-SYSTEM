@@ -2,7 +2,7 @@ const socket = io();//is this prebuilt?
 
 // Logic: We emit an event called 'message' with a string
 // allowed=["visionary","daya","roshan","krishna"] !allowed.includes(username.toLowerCase().trim())
-const username=localStorage.getItem("username")||""
+const username=(localStorage.getItem("username")||"").trim()
 if (username&&username.trim().length>3)
 {
     socket.emit('username',username);
@@ -15,11 +15,11 @@ const typingArea=document.getElementById("typing-monitor")
 const list=document.getElementById("online-users-list")
 
 function show_msg(data){
-   console.log('History says:', data.msg);
+   console.log(`${data.user} says:`, data.msg);
 
     // Create a new div for the message
     const messageDiv = document.createElement('div');
-    if(data.id && data.id===socket.id){
+    if(data.user && data.user===username){
     messageDiv.innerText =data.msg;
     messageDiv.classList.add('mymsg');
     }
